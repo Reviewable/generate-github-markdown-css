@@ -15,6 +15,8 @@ First a [rendered Markdown](fixture.md) with all possible syntax is fetched from
 
 ## Usage
 
+Requires Node.js 22.20.0 or newer.
+
 ```js
 const githubMarkdownCss = require('generate-github-markdown-css');
 

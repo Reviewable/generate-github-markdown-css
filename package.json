@@ -1,6 +1,6 @@
 {
   "name": "generate-github-markdown-css",
-  "version": "2.2.1",
+  "version": "3.0.0",
   "description": "Generate the CSS for github-markdown-css",
   "license": "MIT",
   "repository": "sindresorhus/generate-github-markdown-css",
@@ -21,10 +21,10 @@
     }
   ],
   "bin": {
-    "github-markdown-css": "cli.js"
+    "github-markdown-css": "cli.mjs"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=22.20.0"
   },
   "devEngines": {
     "runtime": {
@@ -37,7 +37,7 @@
   },
   "files": [
     "index.js",
-    "cli.js",
+    "cli.mjs",
     "fixture.md"
   ],
   "keywords": [
@@ -51,11 +51,10 @@
     "stylesheet"
   ],
   "dependencies": {
-    "cheerio": "^0.22.0",
+    "cheerio": "^1.2.0",
     "css": "^3.0.0",
-    "got": "^9.0.0",
-    "meow": "6.1.0",
-    "pify": "^4.0.0",
+    "got": "^16.2.0",
+    "meow": "^14.1.0",
     "uncss": "^0.17.3"
   },
   "devDependencies": {
