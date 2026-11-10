@@ -1,4 +1,4 @@
-# generate-github-markdown-css [![Build Status](https://travis-ci.org/sindresorhus/generate-github-markdown-css.svg?branch=master)](https://travis-ci.org/sindresorhus/generate-github-markdown-css)
+# generate-github-markdown-css [![Tests](https://github.com/Reviewable/generate-github-markdown-css/actions/workflows/test.yaml/badge.svg)](https://github.com/Reviewable/generate-github-markdown-css/actions/workflows/test.yaml)
 
 > Generate the CSS for [`github-markdown-css`](https://github.com/sindresorhus/github-markdown-css)
 
@@ -14,6 +14,8 @@ First a [rendered Markdown](fixture.md) with all possible syntax is fetched from
 
 
 ## Usage
+
+Requires Node.js 22.20.0 or newer.
 
 ```js
 const githubMarkdownCss = require('generate-github-markdown-css');

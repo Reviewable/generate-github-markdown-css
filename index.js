@@ -1,16 +1,15 @@
 'use strict';
-const got = require('got');
-const cheerio = require('cheerio');
+const {load} = require('cheerio/slim');
 const uncss = require('uncss');
-const pify = require('pify');
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
+const {promisify} = require('node:util');
 
-const uncssP = pify(uncss);
+const uncssAsync = promisify(uncss);
 
-const getCSS = () => got('https://github.com').then(response => {
+const getCSS = got => got('https://github.com').then(response => {
 	const ret = [];
-	const $ = cheerio.load(response.body);
+	const $ = load(response.body);
 
 	$('link[href$=".css"]').each((i, el) => {
 		ret.push(el.attribs.href);
@@ -23,16 +22,15 @@ const getCSS = () => got('https://github.com').then(response => {
 	return ret;
 });
 
-const getRenderedFixture = () => got.post('https://api.github.com/markdown', {
+const getRenderedFixture = got => got.post('https://api.github.com/markdown', {
 	headers: {
-		'content-type': 'application/json',
 		'user-agent': 'generate-github-markdown-css'
 	},
-	body: JSON.stringify({
+	json: {
 		mode: 'gfm',
 		context: 'sindresorhus/generate-github-markdown-css',
 		text: fs.readFileSync(path.join(__dirname, 'fixture.md'), 'utf8')
-	})
+	}
 }).then(response => `<div class="markdown-body">\n${response.body}\n</div>`);
 
 const cleanupCss = str => {
@@ -98,10 +96,8 @@ const cleanupCss = str => {
 	return css.stringify(style);
 };
 
-module.exports = () =>
-	Promise.all([
-		getRenderedFixture(),
-		getCSS()
-	])
-	.then(x => uncssP(x[0], {stylesheets: x[1], ignore: [/^\.pl|^\.tab-size/]}))
-	.then(cleanupCss);
+module.exports = async () => {
+	const {default: got} = await import('got');
+	const [fixture, stylesheets] = await Promise.all([getRenderedFixture(got), getCSS(got)]);
+	return cleanupCss(await uncssAsync(fixture, {stylesheets, ignore: [/^\.pl|^\.tab-size/]}));
+};
