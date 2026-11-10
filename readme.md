@@ -1,4 +1,4 @@
-# generate-github-markdown-css [![Build Status](https://travis-ci.org/sindresorhus/generate-github-markdown-css.svg?branch=master)](https://travis-ci.org/sindresorhus/generate-github-markdown-css)
+# generate-github-markdown-css [![Tests](https://github.com/Reviewable/generate-github-markdown-css/actions/workflows/test.yaml/badge.svg)](https://github.com/Reviewable/generate-github-markdown-css/actions/workflows/test.yaml)
 
 > Generate the CSS for [`github-markdown-css`](https://github.com/sindresorhus/github-markdown-css)
 
